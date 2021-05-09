@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.leonardo</groupId>
-	<artifactId>Rest-Api</artifactId>
+	<artifactId>cities</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Rest-Api</name>
+	<name>cities</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -62,6 +62,7 @@
 		</dependency>
 	</dependencies>
 
+
 	<build>
 		<plugins>
 			<plugin>
@@ -74,6 +75,34 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<classifier>spring-boot</classifier>
+							<mainClass>
+								com.baeldung.executable.ExecutableMavenJar
+							</mainClass>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>3.0.3</version>
+				<configuration>
+					<appName>cities</appName>
+					<processTypes>
+						<web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
+					</processTypes>
 				</configuration>
 			</plugin>
 		</plugins>
